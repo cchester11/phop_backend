@@ -12,10 +12,12 @@ app.use('/', routes);
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-app.listen(8000, (error) => {
-      if(error) {
-            console.error('Error running server: ', error)
-      }
+const server = app.listen(8000);
 
-      console.log('Server running on PORT 8000')
+server.on('error', (error) => {
+      console.error('Error running server:', error);
+});
+
+server.on('listening', () => {
+      console.log('Server running on PORT 8000');
 });
