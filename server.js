@@ -4,9 +4,13 @@ const app = express();
 const path = require('path');
 const cors = require('cors');
 
+const routes = require('./routes/index');
+
 app.use(cors());
 
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
+app.use('/', routes);
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.listen(8000, (error) => {
       if(error) {
@@ -14,4 +18,4 @@ app.listen(8000, (error) => {
       }
 
       console.log('Server running on PORT 8000')
-})
+});
