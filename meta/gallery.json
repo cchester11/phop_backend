@@ -1,0 +1,53 @@
+{
+      "gallery": [
+            {
+                  "id": 1,
+                  "title": "blue_1",
+                  "description": "Bleu looking up at a toy",
+                  "category": "animals",
+                  "image_url": "/assets/photos/blue_1_060424.jpg"
+            },
+            {
+                  "id": 2,
+                  "title": "davids_beamer",
+                  "description": "Davids beamer against a white background",
+                  "category": "cars",
+                  "image_url": "/assets/photos/davids_beamer070424.jpg"
+            },
+            {
+                  "id": 3,
+                  "title": "eclipse_2",
+                  "description": "a photo of a partial eclipse",
+                  "category": "landscapes",
+                  "image_url": "/assets/photos/eclipse_2_080424.jpg"
+            },
+            {
+                  "id": 4,
+                  "title": "eclipse",
+                  "description": "a photo of a full eclipse",
+                  "category": "landscapes",
+                  "image_url": "/assets/photos/eclipse080424.jpg"
+            },
+            {
+                  "id": 5,
+                  "title": "old_car",
+                  "description": "A rusty old car",
+                  "category": "cars",
+                  "image_url": "/assets/photos/old_car070424.jpg"
+            },
+            {
+                  "id": 6,
+                  "title": "rusty_dodge_2",
+                  "description": "A rusty old scrapped dodge truck",
+                  "category": "cars",
+                  "image_url": "/assets/photos/rusty_dodge_2_060424.jpg"
+            },
+            {
+                  "id": 7,
+                  "title": "tonka",
+                  "description": "A tonka truck discarded among the bushes",
+                  "category": "cars",
+                  "image_url": "/assets/photos/tonka_060424.jpg"
+            }
+      ]
+}
