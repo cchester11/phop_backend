@@ -6,7 +6,7 @@ const cors = require('cors');
 
 app.use(cors());
 
-app.use('/photos', express.static(path.join(__dirname, 'assets')))
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
 app.listen(8000, (error) => {
       if(error) {
