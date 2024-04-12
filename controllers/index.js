@@ -23,5 +23,9 @@ const printGallery = (req, res) => {
       }
 };
 
+const sendImage = (req, res) => {
+
+};
+
 // export controllers
-module.exports = { printGallery };
+module.exports = { printGallery, sendImage };
