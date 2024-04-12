@@ -15,7 +15,7 @@ const printGallery = (req, res) => {
 
             // send the gallery array
             res.json(references.gallery);
-            
+
             // handle error
       } catch (error) {
             console.error('Error retrieving image references: ', error);
@@ -24,7 +24,24 @@ const printGallery = (req, res) => {
 };
 
 const sendImage = (req, res) => {
+      // grab param
+      const imageName = req.params.imageName;
+      // path to image based on param 
+      const imagePath = path.join(__dirname, '..', 'uploads', imageName);
 
+      // if path to image exist, pipe image to client
+      if (fs.existsSync(imagePath)) {
+            res.setHeader('Content-Type', 'image/jpeg')
+
+            fs.createReadStream(imagePath).pipe(res);
+      } else {
+            // else send error
+            res.status(404).json({ 
+                  error: "Image not found",
+                  imageName: imageName,
+                  imagePath: imagePath
+            })
+      }
 };
 
 // export controllers
