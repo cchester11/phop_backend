@@ -3,30 +3,25 @@ const fs = require('fs');
 
 // print gallery controller
 const printGallery = (req, res) => {
-      // send images to frontend
-      const uploadsDir = path.join(__dirname, '..', 'uploads');
+      try {
+            // path to gallery.json
+            const jsonDir = path.join(__dirname, '..', 'json', 'gallery.json');
 
-      // Read the contents of the "uploads" folder
-      fs.readdir(uploadsDir, (err, files) => {
-            // handle error reading the uploads directory
-            if (err) {
-                  console.error('Error reading uploads directory:', err);
-                  return res.status(500).json({ error: 'Internal server error' });
-            }
+            // read gallery.json
+            const fileData = fs.readFileSync(jsonDir, 'utf-8');
 
-            // Filter out non-image files if needed
-            const imageFiles = files.filter(file => /\.(jpg|jpeg|png|gif)$/i.test(file));
+            // parse the data
+            const references = JSON.parse(fileData);
 
-            // Read each image file and send its contents in the response
-            const images = imageFiles.map(file => {
-                  const filePath = path.join(uploadsDir, file);
-                  const data = fs.readFileSync(filePath, 'binary');
-                  return { filename: file, data };
-            });
-
-            // response object containing images
-            res.json({ images });
-      });
+            // send the gallery array
+            res.json(references.gallery);
+            
+            // handle error
+      } catch (error) {
+            console.error('Error retrieving image references: ', error);
+            res.status(500).json({ error: 'Internal server error' })
+      }
 };
 
+// export controllers
 module.exports = { printGallery };
