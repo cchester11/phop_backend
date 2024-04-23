@@ -34,6 +34,11 @@
                   "id": 7,
                   "name": "tonka_060424.jpg",
                   "image_url": "uploads/tonka_060424.jpg"
+            },
+            {
+                  "id": 8,
+                  "name": "cardinal_2_180424.jpg",
+                  "image_url": "uploads/cardinal_2_180424.jpg"
             }
       ]
 }
