@@ -26,6 +26,12 @@ const printGallery = (req, res) => {
 const sendImage = (req, res) => {
       // grab param
       const imageName = req.params.imageName;
+
+      // Validate image name to prevent directory traversal
+      if (!imageName.match(/^[a-zA-Z0-9\-_.]+$/)) {
+            return res.status(400).json({ error: 'Invalid image name' });
+      }
+
       // path to image based on param 
       const imagePath = path.join(__dirname, '..', 'uploads', imageName);
 
@@ -36,7 +42,7 @@ const sendImage = (req, res) => {
             fs.createReadStream(imagePath).pipe(res);
       } else {
             // else send error
-            res.status(404).json({ 
+            res.status(404).json({
                   error: "Image not found",
                   imageName: imageName,
                   imagePath: imagePath
