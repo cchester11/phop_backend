@@ -10,7 +10,10 @@ app.use(cors());
 
 app.use('/', routes);
 
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
+      index: false,
+      maxAge: '1d'
+}));
 
 const server = app.listen(8000);
 
