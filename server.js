@@ -2,6 +2,16 @@
 const express = require('express');
 const app = express();
 
+// import env 
+const dotenv = require('dotenv');
+dotenv.config();
+
+// environment variables
+const PORT = process.env.PORT
+const IP = process.env.IP
+const NODE_ENV = process.env.NODE_ENV
+const IS_LOCAL = NODE_ENV === 'local'
+
 // rate limit handler package
 const { rateLimit } = require('express-rate-limit');
 
@@ -29,12 +39,22 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
 }));
 
 // server 
-const server = app.listen(8000);
+if(IS_LOCAL) {
+      // if running locally
+      app.listen(3001, (err) => {
+            if(err) {
+                  throw new Error(err)
+            }
 
-server.on('error', (error) => {
-      console.error('Error running server:', error);
-});
-
-server.on('listening', () => {
-      console.log('Server running on PORT 8000');
-});
+            console.log('running locally')
+      })
+} else {
+      // if running on railway service
+      app.listen(PORT, IP, (err) => {
+            if(err) {
+                  throw new Error(err)
+            } else {
+                  console.log('Listening on PORT ' + PORT)
+            }
+      });
+};
