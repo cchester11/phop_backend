@@ -41,7 +41,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
 // server 
 if(IS_LOCAL) {
       // if running locally
-      app.listen(3001, (err) => {
+      app.listen(8000, (err) => {
             if(err) {
                   throw new Error(err)
             }
