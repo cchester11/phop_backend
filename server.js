@@ -2,6 +2,10 @@
 const express = require('express');
 const app = express();
 
+// use helmet to secure request and response
+const helmet = require('helmet');
+app.use(helmet());
+
 // import env 
 const dotenv = require('dotenv');
 dotenv.config();
