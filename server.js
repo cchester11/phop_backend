@@ -23,6 +23,7 @@ const { rateLimit } = require('express-rate-limit');
 const path = require('path');
 const cors = require('cors');
 
+// import routes
 const routes = require('./routes/index');
 
 // set options for rateLimiter
@@ -36,17 +37,30 @@ const limiter = rateLimit({
 app.use(cors());
 app.use(limiter);
 app.use('/', routes);
+
 // serve uploads folder with options to protect against attacks
 app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
       index: false,
       maxAge: '1d'
 }));
 
+// employ Content Security Policy to only allow request from accepted URL's
+app.use(
+      helmet.contentSecurityPolicy({
+            directives: {
+                  defaultSrc: ["'self'"],
+                  scriptSrc: ["'self'", 'phop-frontend.vercel.app'],
+                  styleSrc: ["'self'", 'phop-frontend.vercel.app'],
+                  // Add other directives as needed
+            },
+      })
+);
+
 // server 
-if(IS_LOCAL) {
+if (IS_LOCAL) {
       // if running locally
       app.listen(8000, (err) => {
-            if(err) {
+            if (err) {
                   throw new Error(err)
             }
 
@@ -55,7 +69,7 @@ if(IS_LOCAL) {
 } else {
       // if running on railway service
       app.listen(PORT, IP, (err) => {
-            if(err) {
+            if (err) {
                   throw new Error(err)
             } else {
                   console.log('Listening on PORT ' + PORT)
